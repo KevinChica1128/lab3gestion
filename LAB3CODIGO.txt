@@ -1,0 +1,72 @@
+------- Trabajo #1 -------
+----- punto1 -----
+UPDATE editor
+SET nombreeditor='Nueva Editorial'
+WHERE codeditorial='E3';
+----- punto2 -----
+UPDATE autor
+SET paisautor='Mexico'
+WHERE nombreautor='AT4';
+----- punto3 -----
+DELETE
+FROM copia
+WHERE codigotit='L10';
+----- punto4 -----
+DELETE
+FROM estudiante
+WHERE codigoest='200622555';
+
+------- Trabajo#2 -------
+----- SUM -----
+SELECT codigoTit, SUM(costovolumen)
+FROM Copia
+GROUP BY codigoTit;
+----- COUNT -----
+SELECT codigotit, COUNT(nrocopia)
+FROM copia
+GROUP BY codigotit;
+----- MAX y MIN-----
+SELECT MAX(costovolumen),MIN(costovolumen)
+FROM copia; 
+----- AVG -----
+SELECT AVG(costovolumen)
+FROM copia;
+
+------- trabajo#3 -------
+----- punto6 -----
+SELECT codigotit
+FROM titulo
+WHERE codEditorial IN
+	(SELECT codeditorial
+	FROM editor
+	WHERE sedeEditor='Cali');
+----- punto7 -----
+SELECT DISTINCT codigotit
+FROM copia
+WHERE costovolumen>(SELECT AVG(costovolumen)
+     				FROM copia);
+----- punto8 -----
+SELECT*
+FROM estudiante
+WHERE planestudio='Ing. Civil' and codigoEst IN
+    (SELECT codigoest
+	FROM prestamos
+	WHERE codigoobraprest IN	
+			(SELECT codigoTit
+  			FROM titulo
+    		WHERE autortit='AT1'));
+            
+------- trabajo#4 -------
+CREATE VIEW vistaEditorial AS 
+SELECT codEditorial , nombreEditor, sedeEditor 
+FROM EDITOR; 
+----- punto9 -----
+SELECT codeditorial,nombreeditor
+FROM vistaEditorial
+WHERE sedeeditor='Cali';
+----- punto10 -----
+CREATE VIEW DatosTitulos AS 
+SELECT copia.codigotit=titulo.codigotit,copia.nrocopia,titulo.nombretit,titulo.autortit,editor.nombreeditor
+FROM copia,titulo,editor ; 
+----- punto11 -----
+
