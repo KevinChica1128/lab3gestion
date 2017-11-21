@@ -66,7 +66,12 @@ FROM vistaEditorial
 WHERE sedeeditor='Cali';
 ----- punto10 -----
 CREATE VIEW DatosTitulos AS 
-SELECT copia.codigotit=titulo.codigotit,copia.nrocopia,titulo.nombretit,titulo.autortit,editor.nombreeditor
-FROM copia,titulo,editor ; 
+SELECT copia.codigotit,copia.nrocopia,titulo.nombretit,titulo.autortit,editor.nombreeditor
+FROM copia
+     INNER JOIN titulo ON copia.codigotit=titulo.codigotit
+     INNER JOIN editor ON titulo.codEditorial=editor.codEditorial; 
 ----- punto11 -----
+CREATE VIEW VistaEstudiante AS
+SELECT codigoest, nombreest, planestudio, ciudadest
+FROM estudiante;
 
