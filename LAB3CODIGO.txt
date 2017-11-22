@@ -32,6 +32,7 @@ FROM copia;
 SELECT AVG(costovolumen)
 FROM copia;
 
+
 ------- trabajo#3 -------
 ----- punto6 -----
 SELECT codigotit
@@ -74,4 +75,67 @@ FROM copia
 CREATE VIEW VistaEstudiante AS
 SELECT codigoest, nombreest, planestudio, ciudadest
 FROM estudiante;
+
+
+------- Trabajo#5 -------
+----- CREACIÓN DE TABLAS QUE NO TIENEN RESTRICCIONES -----
+CREATE TABLE Garaje(
+	codigo VARCHAR(5) PRIMARY KEY,
+    nombre VARCHAR(20),
+    direccion VARCHAR(40)
+);
+CREATE TABLE Agencia(
+	codigo VARCHAR(5) PRIMARY KEY,
+    nombre VARCHAR(20),
+    direccion VARCHAR(40),
+    ciudad VARCHAR(20)
+);
+CREATE TABLE ListaReserva(
+	reserva NUMERIC(4) PRIMARY KEY REFERENCES Reserva(numeroR),
+    placaVehic VARCHAR(7) REFERENCES Vehiculo(placa),
+    litrosInicio NUMERIC(3),
+    precioReserva NUMERIC(10,3)
+);
+----- punto12,16,17,19 -----
+CREATE TABLE Reserva(
+	numeroR NUMERIC(4) PRIMARY KEY,
+    fechaIni DATE DEFAULT CURRENT_DATE,
+    fechaFin DATE CHECK (fechaIni<fechaFin),
+    cliente VARCHAR(10) REFERENCES Cliente (nitCli)
+    ON DELETE CASCADE
+	ON UPDATE CASCADE,
+    agencia VARCHAR(5) REFERENCES Agencia (codigo) ,
+    precioR NUMERIC(10,3) DEFAULT 185000,
+    FecDevolucion DATE
+);
+----- punto13,15 -----
+CREATE DOMAIN dominioSexo CHAR(9)
+	CHECK (VALUE IN('Masculino','Femenino'));
+    
+CREATE TABLE CLIENTE(
+	nitCli VARCHAR(10) PRIMARY KEY,
+    nombre VARCHAR(20),
+    direccion VARCHAR(40),
+    ciudad VARCHAR(20),
+    sexo dominioSexo,
+    edad NUMERIC(2) CHECK(edad BETWEEN 18 and 55),
+    telefono VARCHAR(12)
+);
+----- punto14,18 -----
+CREATE TABLE Vehiculo(
+	placa VARCHAR(7) PRIMARY KEY,
+    marca VARCHAR(20) DEFAULT 'Desconocido'
+    	CHECK(marca IN('Chevrolet','Mazda','Renault','Mitsubishi','Volkswagen','Ford','Volvo',
+                      'GMC','Dodge','Hunday','Toyota','Nissan','BMW','Fiat')),
+    modelo NUMERIC(4),
+    color VARCHAR(15),
+    garaje VARCHAR(5) REFERENCES Garaje (codigo)
+    ON DELETE SET NULL
+    ON UPDATE SET NULL,
+    precioAlquiler NUMERIC(10,3)
+);
+----- punto20 -----
+
+
+
 
