@@ -293,3 +293,6 @@ INSERT INTO LISTARESERVA VALUES
 ALTER TABLE ListaReserva ALTER COLUMN precioreserva TYPE Double Precision;
 ----- Punto22 -----
 ALTER TABLE ListaReserva ADD CONSTRAINT litrosInicio CHECK(litrosInicio>5 AND litrosInicio<10 );
+
+----- Punto23 -----
+-Ya fue resuelto en el punto 20-
