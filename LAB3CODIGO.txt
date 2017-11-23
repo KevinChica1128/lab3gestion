@@ -289,3 +289,7 @@ INSERT INTO LISTARESERVA VALUES
 (28,'TIK-330',6,399000),
 (29,'TZP-901',9,294000),
 (30,'OGB-026',9,208000);
+----- Punto21 -----
+ALTER TABLE ListaReserva ALTER COLUMN precioreserva TYPE Double Precision;
+----- Punto22 -----
+ALTER TABLE ListaReserva ADD CONSTRAINT litrosInicio CHECK(litrosInicio>5 AND litrosInicio<10 );
