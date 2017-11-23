@@ -42,10 +42,13 @@ WHERE codEditorial IN
 	FROM editor
 	WHERE sedeEditor='Cali');
 ----- punto7 -----
-SELECT DISTINCT codigotit
-FROM copia
-WHERE costovolumen>(SELECT AVG(costovolumen)
-     				FROM copia);
+SELECT nombretit
+FROM TITULO
+WHERE codigotit IN
+	(SELECT DISTINCT codigotit
+	FROM copia
+	WHERE costovolumen>(SELECT AVG(costovolumen)
+     				FROM copia));
 ----- punto8 -----
 SELECT*
 FROM estudiante
@@ -113,7 +116,7 @@ CREATE DOMAIN dominioSexo CHAR(9)
 	CHECK (VALUE IN('Masculino','Femenino'));
     
 CREATE TABLE CLIENTE(
-	nitCli VARCHAR(10) PRIMARY KEY,
+    nitCli VARCHAR(10) PRIMARY KEY,
     nombre VARCHAR(20),
     direccion VARCHAR(40),
     ciudad VARCHAR(20),
@@ -135,7 +138,154 @@ CREATE TABLE Vehiculo(
     precioAlquiler NUMERIC(10,3)
 );
 ----- punto20 -----
+INSERT INTO CLIENTE VALUES
+(1144050200,'Julian','Clle 30 # 22a03','Jamundí','Masculino',28,3006215873),
+(1169584723,'Maria','Clle 49 # 32c46','Jamundí','Femenino', 20, 3117876249),
+(65243658,'Felipe','Cra 44 # 20 55','Cali','Masculino',43,3156485201),
+(548961230,'Yuliet','Clle 3N # 01 23','Cali','Femenino',37,3049871310),
+(1151962897,'David','Trv. 22 #7-01','Palmira','Masculino',18,3127879621),
+(1144203432,'Laura','Cl. 6 #8-01','Palmira','Femenino',22,3201569148),
+(1143942346,'Marta','Cr. 3N #9-01','Cali','Femenino',24,3174569213),
+(1130643925,'Antonio','Av. 2 #10-01','Jamundí','Masculino',54,4201569830),
+(1144060160,'Javier','Cl. 6 #11-01','Neiva','Masculino',48,5623148900),
+(1144196916,'Jesus','Trv. 11 #12-01','Cali','Masculino',30,3214896501),
+(1116774965,'Carlos','Av. 5 #13-01','Bogota','Masculino',20,1263054789),
+(1143829613,'Miguel','Diag.16 #14-01','Bogota','Masculino',40,3659874122),
+(1114736033,'Pablo','Cl. 2 #15-01','Barranquilla','Masculino',25,1456320147),
+(38595149,'Luis','Cl. 22 #1-01','Barranquilla','Masculino',31,3214567890),
+(1151946299,'Daniela','Cl. 19 #2-01','Cali','Femenino',19,3332154684),
+(38565269,'Luisa','Cr. 17 #3-01','Ibague','Femenino',25,2136054871),
+(1060878214,'Gloria','Cl. 15 #4-01','Ibague','Femenino',33,3256985632),
+(1144188165,'Aurora','Cr. 12 #5-01','Jamundí','Femenino',43,3497613494),
+(1130603058,'Leandro','Cl. 9 #6-01','Palmira','Masculino',44,3032150560),
+(1143832873,'Leonardo','Diag. 3 #3-3','Cali','Masculino',50,3659841230);
 
+INSERT INTO AGENCIA VALUES
+('A1','Rentalcars','Trv. 4 #4-4','Cali'),
+('A2','Despegar','Cl. 5 #5-5','Cali'),
+('A3','Umadi','Cl. 6#6-6','Jamundí'),
+('A4','Autoalquilados','Cra. 2 BIS #78-74','Jamundí'),
+('A5','ABC autos','Cra. 41D #26-55','Bogotá'),
+('A6','Avis','Cra. 26 #33C-53','Bogotá'),
+('A7','Localiza','Cra. 49 E #52-91','Barranquilla'),
+('A8','Colrentacar','Cra. 40B #2-26','Barranquilla'),
+('A9','Alkilautos','Cra. 1DN #77-64','Palmira'),
+('A10','Rentacarcolombia','Cra. 41C #42-38','Palmira'),
+('A11','Kayak','Clle. 84B #1-121','Valledupar'),
+('A12','Milanocar','Cra. 36 B #13-66','Corinto'),
+('A13','Executiverentacar','Clle. 72 #3BN-34','Popayán'),
+('A14','drmcarrental','Clle. 15 A #44-20','Popayán'),
+('A15','Rentarte','Cra. 24 #70A1-56','Medellin'),
+('A16','Cheap-auto','Clle. 23 #41-12','Medellin'),
+('A17','Americarentacar','Cra. 7P #72-28','Ibague'),
+('A18','Alquilatucarro','Cra. 7P #72-26','Ibague'),
+('A19','Royalrenta','CALLE 49 #24-10','Manizales'),
+('A20','Hertz','Trv. 22 #03-03','Manizales');
 
+INSERT INTO GARAJE VALUES
+('G1','Garaje la 20','Clle. 25 #42A-30'),
+('G2','Los colores','Clle. 10 #52-50'),
+('G3','Santa Elena','Cra. 29B #14C-45'),
+('G4','La luna','Clle. 12C #28-10'),
+('G5','El trebol','Clle. 18 #21-31'),
+('G6','Alameda','Cra. 24 #7-46'),
+('G7','Coomeva','Cra. 57 #12A-5'),
+('G8','City Parking','Cra. 40 #5B'),
+('G9','Parqueadero central','Clle. 49 # 28-28'),
+('G10','Parqueadero Dgar','Clle. 8 #8-64'),
+('G11','San Francisco','Calle. 9 #5-34'),
+('G12','Parqueadero el Cid','Clle. 9 #4-34'),
+('G13','Garaje la 72','Clle. 72 #7U-52'),
+('G14','Garaje el Peñon','Cra. 3 #1-60'),
+('G15','Versalles','Clle. 18N #3N-11'),
+('G16','Panamericano','Av. 6Bis #35A-90'),
+('G17','Los socios','Cra. 144 #5C-155'),
+('G18','Parking Sucre','Cra. 8 #15-61'),
+('G19','Garaje las Seivas','Av. 3N #3A-03'),
+('G20','Parqueadero Calima','Trv. 1 # 22-06');
 
+INSERT INTO VEHICULO VALUES
+('TZP-901','Volkswagen',2015,'Negro','G1',100000),
+('WMW-665','Volkswagen',2016,'Blanco','G2',130000),
+('VCW-579','Renault',2017,'Rojo','G3',210000),
+('VCM-665','Mazda',2000,'Azul','G4',85000),
+('ZPT-123','Dodge',2015,'Blanco','G5',49000),
+('VCW-576','Hunday',2011,'Verde','G6',125000),
+('TWM-665','Chevrolet',2010,'Amarillo','G7',136000),
+('TAJ-990','Mitsubishi',2013,'Gris','G8',260000),
+('KEA-660','Ford',2014,'Naranja','G9',300000),
+('TOE-237','Volvo',2016,'Negro','G10',360000),
+('OKJ-026','GMC',2017,'Blanco','G11',220000),
+('MEL-913','Toyota',2017,'Morado','G12',169000),
+('MDK-128','Nissan',2015,'Rojo','G13',166000),
+('TIK-330','Volkswagen',2014,'Verde','G14',200000),
+('VCM-555','BMW',2010,'Azul','G15',100000),
+('CIA-666','Fiat',2016,'Dorado','G16',254000),
+('LFA-900','Dodge',1998,'Gris','G17',168000),
+('OGB-026','BMW',2006,'Aguamarina','G18',128000),
+('LFE-601','Ford',2015,'Amarillo','G19',281000),
+('OGB-129','Fiat',2000,'Blanco','G20',317000);
 
+INSERT INTO RESERVA VALUES
+(01,'14/11/2014','14/12/2014',1144050200,'A2',100000,'07/12/2014'),
+(02,'12/12/2014','12/01/2015',1169584723,'A2',85000,'10/01/2015'),
+(03,'20/01/2015','20/02/2015',1144050200,'A1',130000,'15/02/2015'),
+(04,'27/02/2015','29/03/2015',1144050200,'A10',317000,'29/03/2015'),
+(05,'03/04/2015','03/05/2015',1169584723,'A20',281000,'02/05/2015'),
+(06,'10/10/2014','10/11/2014',1169584723,'A18',220000,'01/11/2014'),
+(07,'07/08/2014','07/10/2014',1144050200,'A3',317000,'01/10/2014'),
+(08,'22/12/2016','22/01/2017',1144050200,'A4',281000,'20/01/2017'),
+(09,'29/01/2017','28/02/2017',1144050200,'A5',128000,'28/02/2017'),
+(10,'06/04/2015','06/05/2015',1144050200,'A6',168000,'05/05/2015'),
+(11,'13/12/2014','13/01/2015',1144050200,'A7',254000,'10/01/2015'),
+(12,'11/10/2014','11/11/2014',1144050200,'A8',100000,'11/11/2014'),
+(13,'01/03/2010','01/05/2010',1144050200,'A9',200000,'30/04/2010'),
+(14,'11/12/2011','11/01/2012',1144050200,'A11',166000,'10/01/2012'),
+(15,'31/12/2012','01/02/2013',1144050200,'A12',169000,'28/02/2013'),
+(16,'06/06/2012','06/07/2012',1144050200,'A13',220000,'06/07/2012'),
+(17,'01/01/2013','01/02/2013',1144050200,'A14',360000,'26/01/2013'),
+(18,'04/04/2013','04/05/2013',1144050200,'A15',300000,'03/05/2013'),
+(19,'15/06/2014','15/07/2014',1144050200,'A16',49000,'10/07/2014'),
+(20,'20/08/2014','20/09/2014',1144050200,'A17',166000,'15/09/2014'),
+(21,'20/07/2013','20/08/2013',1144050200,'A18',200000,'20/08/2013'),
+(22,'19/06/2017','20/07/2017',1144050200,'A19',220000,'14/07/2017'),
+(23,'23/09/2017','24/11/2017',1144050200,'A20',166000,NULL),
+(24,'16/10/2016','16/12/2016',1130643925,'A5',220000,'16/12/2016'),
+(25,'29/10/2017','01/01/2018',1130643925,'A6',130000,NULL),
+(26,'20/10/2014','20/11/2014',1130603058,'A7',100000,'19/11/2014'),
+(27,'09/08/2014','09/09/2014',1151962897,'A8',169000,'08/09/2014'),
+(28,'17/12/2016','17/02/2017',1144203432,'A9',166000,'17/01/2017'),
+(29,'30/05/2016','30/07/2016',1143832873,'A10',100000,'28/07/2016'),
+(30,'09/10/2017','09/12/2017',1130643925,'A11',130000,NULL);
+
+INSERT INTO LISTARESERVA VALUES
+(01,'TZP-901',6,300000),
+(02,'WMW-665',8,500000),
+(03,'VCW-579',9,235000),
+(04,'VCM-665',7,240000),
+(05,'ZPT-123',7,370000),
+(06,'VCW-576',6,400000),
+(07,'TWM-665',8,268000),
+(08,'TAJ-990',8,259000),
+(09,'KEA-660',9,169000),
+(10,'TOE-237',9,245000),
+(11,'OKJ-026',6,255000),
+(12,'MEL-913',6,301000),
+(13,'MDK-128',6,296000),
+(14,'TIK-330',6,560000),
+(15,'VCM-555',8,610000),
+(16,'CIA-666',7,570000),
+(17,'LFA-900',9,200000),
+(18,'OGB-026',6,216000),
+(19,'LFE-601',8,399000),
+(20,'OGB-129',7,469000),
+(21,'TZP-901',7,780000),
+(22,'OGB-026',8,427000),
+(23,'ZPT-123',6,460000),
+(24,'VCW-576',7,520000),
+(25,'CIA-666',9,385000),
+(26,'TZP-901',9,395000),
+(27,'OGB-026',9,406000),
+(28,'TIK-330',6,399000),
+(29,'TZP-901',9,294000),
+(30,'OGB-026',9,208000);
