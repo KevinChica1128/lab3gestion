@@ -1,4 +1,4 @@
-------- Trabajo #1 -------
+ ------- Trabajo #1 -------
 ----- punto1 -----
 UPDATE editor
 SET nombreeditor='Nueva Editorial'
@@ -50,15 +50,9 @@ WHERE codigotit IN
 	WHERE costovolumen>(SELECT AVG(costovolumen)
      				FROM copia));
 ----- punto8 -----
-SELECT*
-FROM estudiante
-WHERE planestudio='Ing. Civil' and codigoEst IN
-    (SELECT codigoest
-	FROM prestamos
-	WHERE codigoobraprest IN	
-			(SELECT codigoTit
-  			FROM titulo
-    		WHERE autortit='AT1'));
+SELECT * FROM estudiante WHERE planestudio='Ing. Civil' and codigoEst IN
+(SELECT codigoestudiante FROM prestamos WHERE codigoobraprest in 
+(select codigotit from titulo where autortit='AT1' ));
             
 ------- trabajo#4 -------
 CREATE VIEW vistaEditorial AS 
@@ -375,6 +369,14 @@ WHERE reserva IN
     GROUP BY cliente
     HAVING COUNT (*)<3));
 ----- punto 35. -----
-select nombre, nitcli from cliente where exists 
-	(select cliente from reserva where cliente.nitcli=reserva.cliente)
+SELECT nitcli,nombre
+FROM CLIENTE
+WHERE not exists
+	(SELECT codigo
+	FROM AGENCIA
+	WHERE not exists
+				(SELECT *
+				FROM RESERVA
+				WHERE 	RESERVA.agencia = AGENCIA.codigo and
+						RESERVA.cliente = CLIENTE.nitcli ) );
 
