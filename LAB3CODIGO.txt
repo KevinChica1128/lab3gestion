@@ -328,7 +328,53 @@ select nombre from cliente where nitcli
        in(select cliente from reserva where agencia='A2')
                            group by cliente) as conteos where conteo>3);   
 ----- punto 31. -----
+SELECT placa, modelo, marca, cantidad_reserva
+FROM (select *
+  FROM (select placavehic, count (placavehic) 	AS cantidad_reserva
+  from Listareserva
+  group by placavehic
+  ORDER BY cantidad_reserva DESC
+  LIMIT 2) AS reservas) AS vehiculos_r
+INNER JOIN 
+Vehiculo ON vehiculos_r.placavehic = Vehiculo.placa ;
 ----- punto 32. -----
+SELECT placa, modelo, marca, cantidad_reserva
+FROM (select *
+  FROM (select placavehic, count (placavehic) 	AS cantidad_reserva
+  from Listareserva
+  group by placavehic
+  ORDER BY cantidad_reserva DESC
+  LIMIT 1) AS reservas) AS vehiculos_r
+INNER JOIN 
+Vehiculo ON vehiculos_r.placavehic = Vehiculo.placa;
 ----- punto 33. -----
+SELECT nitcli,nombre
+FROM CLIENTE
+WHERE nitcli IN
+    (SELECT cliente
+	FROM 	(SELECT cliente,COUNT (cliente) AS CONTEO
+			FROM RESERVA
+			WHERE numeror IN
+    					(SELECT reserva
+						FROM LISTARESERVA
+						WHERE placavehic IN
+        								(SELECT placa
+										FROM VEHICULO
+										WHERE marca='Volkswagen')) 
+			GROUP BY cliente) AS CONTEOS
+	WHERE CONTEO>2);
 ----- punto 34. -----
+SELECT SUM(precioReserva)
+FROM ListaReserva
+WHERE reserva IN
+    (SELECT numeroR
+    FROM Reserva
+    WHERE cliente IN 
+    (SELECT cliente
+    FROM Reserva
+    GROUP BY cliente
+    HAVING COUNT (*)<3));
 ----- punto 35. -----
+select nombre, nitcli from cliente where exists 
+	(select cliente from reserva where cliente.nitcli=reserva.cliente)
+
