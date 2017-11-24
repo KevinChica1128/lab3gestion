@@ -296,3 +296,28 @@ ALTER TABLE ListaReserva ADD CONSTRAINT litrosInicio CHECK(litrosInicio>5 AND li
 
 ----- Punto23 -----
 -Ya fue resuelto en el punto 20-
+
+------- Trabajo #7 -------
+----- punto 24. -----
+Select *  from reserva where agencia in (select codigo from agencia where ciudad ='Jamundí');
+----- punto 25 -----
+Select numeror, fechaini, fechafin, precior, fecdevolucion from reserva where fecdevolucion is NULL order by fechafin;
+----- punto 26 -----
+Select codigo, nombre from agencia where codigo in (select agencia from reserva where fecdevolucion is NULL);
+----- punto 27 -----
+Select codigo, nombre, ciudad from agencia where codigo in (select agencia from reserva where fechaini<'01/15/2015');
+----- punto 28 -----
+Select codigo, nombre, direccion from garaje where codigo 
+	in (select garaje from vehiculo where placa
+    	in (select placavehic from listareserva where reserva
+           in(select numeror from reserva where cliente
+             in(select nitcli from cliente where ciudad='Palmira'))));
+
+------- Trabajo #8 -------
+----- punto 29. -----
+----- punto 30. -----
+----- punto 31. -----
+----- punto 32. -----
+----- punto 33. -----
+----- punto 34. -----
+----- punto 35. -----
