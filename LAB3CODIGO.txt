@@ -322,14 +322,12 @@ where reserva in (
   from Reserva
   where fechaIni between '2016-01-01' and '2016-06-30');
 ----- punto 30. -----
-select nombre, count(nitcli) from cliente, reserva 
-where cliente.nitcli=reserva.cliente and agencia='A2' 
-group by nombre;
+select nombre from cliente where nitcli 
+	in(select cliente from (select cliente, count(cliente) as conteo 
+                            from reserva where cliente 
+       in(select cliente from reserva where agencia='A2')
+                           group by cliente) as conteos where conteo>3);   
 ----- punto 31. -----
-Select placa, modelo, marca 
-	from (select * from (select placavehic, count(placavehic) as cantidad_reserva 
-	  from (listareserva group by placavehic) as reserva where cantidad_reserva>3) 
-		as vehiculo_r winner join vehiculo on vehiculo_r.placavehic=vehiculo.placa;
 ----- punto 32. -----
 ----- punto 33. -----
 ----- punto 34. -----
