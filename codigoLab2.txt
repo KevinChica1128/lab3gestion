@@ -1,0 +1,323 @@
+Kevin Steven García - 1533173
+Diana Carlonia Arias - 1528008
+Sergio Alejandro Jaramillo - 1531614
+
+CREATE TABLE TITULO (
+codigoTit CHAR(5) PRIMARY KEY,
+nombreTit VARCHAR(30),
+ISBN CHAR(12),
+codEditorial VARCHAR(4),
+annoTit NUMERIC(4),
+autorTit VARCHAR(25)
+);
+
+CREATE TABLE EDITOR (
+codEditorial VARCHAR(4) PRIMARY KEY,
+nombreEditor VARCHAR(20),
+direccionEditor VARCHAR(20),
+telefonoEditor VARCHAR(12),
+sedeEditor VARCHAR(20)
+);
+
+CREATE TABLE AUTOR (
+nombreAutor VARCHAR(20),
+paisAutor VARCHAR (15)
+);
+
+CREATE TABLE COPIA (
+codigoTit CHAR(5),
+nroCopia INTEGER,
+fechaAdquisicion DATE,
+costoVolumen NUMERIC(6,3)
+);
+
+CREATE TABLE ESTUDIANTE(
+codigoEst CHAR(9) PRIMARY KEY,
+nombreEst VARCHAR(20),
+direccionEst VARCHAR(20),
+telefonoEst VARCHAR(12),
+planEstudio VARCHAR(20),
+ciudadEst VARCHAR(15)
+);
+
+CREATE TABLE PRESTAMOS(
+codigoObraPrest VARCHAR(20),
+nroCopia NUMERIC(3),
+codigoEstudiante CHAR(9),
+fechaPrestamo DATE,
+fechaDevolucion DATE,
+fechaEntrega DATE
+);
+
+CREATE TABLE MULTAS(
+codigoEst CHAR(9) PRIMARY KEY,
+valorMulta VARCHAR(10),
+fechaMulta DATE
+);
+
+INSERT INTO TITULO VALUES 
+('L02', 'NT02', 201, 'E1', 2012, 'AT2'),
+('L03', 'NT03', 303, 'E6', 2013, 'AT3'),
+('L04', 'NT04', 204, 'E2', 2015, 'Ruben Males'),
+('L05', 'NT05', 305, 'E3', 1997, 'AT1'),
+('L06', 'NT06', 106, 'E6', 2012, 'AT4'),
+('L07', 'NT07', 207, 'E5', 2014, 'AT2'),
+('L08', 'NT08', 308, 'E5', 2011, 'AT3'),
+('L09', 'NT09', 409, 'E2', 1989, 'AT1'),
+('L10', 'NT10', 510, 'E1', 2010, 'Ruben Males'),
+('L11', 'NT11', 811, 'E3', 2013, 'AT1'),
+('L12', 'NT12', 712, 'E3', 2014, 'AT3'),
+('L13', 'NT13', 913, 'E1', 1999, 'Ruben Males'),
+('L14', 'NT14', 014, 'E2', 2011, 'AT1'),
+('L15', 'NT15', 615, 'E4', 2013, 'AT4');
+
+INSERT INTO EDITOR VALUES
+('E1', 'Editorial 1', 'Av. 1 #100-100', 111111111, 'Bogotá D.C.'),
+('E2', 'Editorial 2', 'Cl. 2 #2-2', 211111111, 'Cali'),
+('E3', 'Editorial 3', 'Diag. 3 #3-3', 411111111, 'Armenia'),
+('E4', 'Editorial 4', 'Trv. 4 #4-4', 611111111, 'Barranquilla'),
+('E5', 'Editorial 5', 'Cl. 5 #5-5', 222222222, 'Cali'),
+('E6', 'Editorial 6', 'Cl. 6#6-6', 233333333, 'Cali');
+
+INSERT INTO AUTOR VALUES
+('AT1' ,'Brasil'),
+('AT2' ,'Colombia'),
+('AT3' ,'Mexico'),
+('AT4' ,'Brasil'),
+('Ruben Males', 'Guyana');
+
+INSERT INTO COPIA VALUES
+('L01', 1, '2017/02/04', 50.000), ('L01', 2, '2017/02/04', 50.000), ('L01', 3, '2017/02/04', 50.000), 
+('L02', 1, '2014/03/26', 26.000), ('L03', 1, '2014/03/21', 90.000), ('L04', 1, '2015/11/17', 35.000), 
+('L05', 1, '2017/05/14', 24.000), ('L05', 2, '2016/04/14', 24.000), ('L05', 3, '2016/09/14', 24.000), 
+('L05', 4, '2013/07/27', 45.000), ('L05', 5, '2013/07/27', 45.000), ('L06', 1, '2014/02/17', 80.000),
+('L07', 1, '2014/02/17', 76.000), ('L08', 1, '2014/02/17', 90.000), ('L09', 1, '2015/04/14', 57.000), 
+('L10', 1, '2013/07/27', 125.000),('L11', 1, '2013/07/27', 84.000), ('L12', 1, '2016/02/05', 50.000), 
+('L13', 1, '2014/03/21', 81.000), ('L13', 2, '2014/03/21', 81.000), ('L13', 3, '2014/03/21', 81.000), 
+('L14', 1, '2013/07/27', 35.000), ('L15', 1, '2014/02/17', 85.000), ('L15', 2, '2014/02/17', 85.000);
+
+INSERT INTO ESTUDIANTE VALUES
+(200400111, 'Luis Chica', 'Cl. 22 #1-01', 3922331, 'Ing. Civil', 'Cali'),
+(200400222, 'Pedro Díaz', 'Cl. 19 #2-01', 3922221, 'Administración', 'Popayan'),
+(200400333, 'Ana Vela', 'Cr. 17 #3-01', 5140120, 'Química', 'Cali'),
+(200400444, 'Juan Pérez', 'Cl. 15 #4-01', 3922441, 'Química', 'Cali'),
+(200511111, 'Eva Sión', 'Cr. 12 #5-01', 5140121, 'Química', 'Cali'),
+(200511222, 'Jorge Gil', 'Cl. 9 #6-01', 3922451, 'Ing. Civil', 'Cali'),
+(200511333, 'Rosa Liandó', 'Trv. 22 #7-01', 8955701, 'Ing. Civil', 'Cali'),
+(200511444, 'Mario Paez', 'Cl. 6 #8-01', 5140122, 'Administración', 'Cali'),
+(200511555, 'José Garzón', 'Cr. 3N #9-01', 4477098, 'Química', 'Neiva'),
+(200622111, 'Raúl Marmol', 'Av. 2 #10-01', 4477097, 'Química', 'Medellín'),
+(200622222, 'Pablo Castro', 'Cl. 6 #11-01', 5140123, 'Química', 'Cali'),
+(200622333, 'Susy Chavez', 'Trv. 11 #12-01', 8955702, 'Ing. Civil', 'Cali'),
+(200622444, 'Martha Evans', 'Av. 5 #13-01', 4477096, 'Ing. Civil', 'Cali'),
+(200622555, 'Lida Duque', 'Diag.16 #14-01', 3922551, 'Ing. Civil', 'Cali'),
+(200622666, 'Fabio Cruz', 'Cl. 2 #15-01', 5140124, 'Administración', 'Buga');
+
+INSERT INTO PRESTAMOS VALUES
+('L03', 1, 200400111, '2016/05/17', '2016/06/17', '2016/06/18'),
+('L01', 1, 200400222, '2016/03/09', '2016/04/09', '2016/04/04'),
+('L04', 1, 200400333, '2016/04/30', '2016/05/30', '2016/05/20'),
+('L11', 1, 200400444, '2016/01/28', '2016/02/28', '2016/02/01'),
+('L15', 1, 200400444, '2016/04/20', '2016/05/20', '2016/05/12'),
+('L02', 1, 200511111, '2016/05/13', '2016/06/13', '20/05/2016'),
+('L01', 3, 200622222, '2016/06/17', '2016/07/17', '30/06/2016'),
+('L07', 1, 200511555, '2016/06/19', '2016/07/19', '22/08/2016'),
+('L08', 1, 200622666, '2016/09/21', '2016/10/21', '30/10/2016'),
+('L10', 1, 200511555, '2016/10/31', '2016/11/30', '28/11/2016'),
+('L09', 1, 200622333, '2016/02/05', '2016/03/05', '09/03/2016'),
+('L14', 1, 200511333, '2016/21/10', '2016/11/21', '21/11/2016'),
+('L01', 2, 200622111, '2016/05/15', '2016/06/15', '26/06/2016'),
+('L05', 1, 200622111, '2016/05/15', '2016/06/15', '26/06/2016'),
+('L15', 2, 200511444, '2016/11/30', '2016/12/30', '06/01/2017');
+
+INSERT INTO MULTAS VALUES
+(200400111, 15.000, '18/06/2016'),
+(200511555, 10.000, '22/08/2016'),
+(200622666, 22.000, '30/10/2016'),
+(200622333, 12.000, '09/03/2016'),
+(200622111, 6.500, '26/06/2016'),
+(200511444, 8.900, '06/01/2017');
+
+INSERT INTO TITULO VALUES
+(null, 'NT02', 201, 'E1', 2012, 'AT2');
+
+INSERT INTO TITULO VALUES
+('L04', 'NT04', 204, 'E2', 2005, 'Ruben Males');
+
+SELECT*
+FROM EDITOR;
+
+SELECT*
+FROM AUTOR;
+
+SELECT (nombreEst,direccionEst)
+FROM ESTUDIANTE;
+
+SELECT*
+FROM TITULO
+WHERE autorTit='Ruben Males';
+
+SELECT*
+FROM COPIA
+WHERE fechaAdquisicion>'01/04/2015';
+
+SELECT nombreTit
+FROM TITULO,COPIA
+WHERE TITULO.codigoTit=COPIA.codigoTit and
+fechaAdquisicion>'01/04/2015';
+
+SELECT nombreEst
+FROM ESTUDIANTE, MULTAS
+WHERE ESTUDIANTE.codigoEst=MULTAS.codigoEst;
+
+CREATE TABLE EQUIPO(
+nroEquipo VARCHAR(10) PRIMARY KEY,
+ciudadEq VARCHAR(15),
+nombreEq VARCHAR(20)
+);
+CREATE TABLE JUGADOR(
+nroJugador CHAR(3) PRIMARY KEY,
+nombreJ VARCHAR(15),
+edadJ INTEGER
+);
+CREATE TABLE JUEGAEN(
+nroJugador CHAR(3) PRIMARY KEY,
+nroEquipo VARCHAR(10),
+años INTEGER
+);
+CREATE TABLE ENTRENADOR(
+nombreDT VARCHAR (15) PRIMARY KEY,
+direccion VARCHAR(20),
+telefono NUMERIC(12),
+fechaNacmto DATE
+);
+CREATE TABLE EXPERIENCIADT(
+nombreDT VARCHAR(15) ,
+nroEquipo VARCHAR(10),
+cargo VARCHAR(15),
+años INTEGER,
+PRIMARY KEY (nombreDT, nroEquipo)
+);
+
+INSERT INTO EQUIPO VALUES
+('E01', 'Boston', 'Medias Rojas'),
+('E02', 'Los Ángeles','Dodgers'),
+('E03','Seattle','Marineros'),
+('E04','Chicago','Medias Blancas'),
+('E05','Detroit','Tigers'),
+('E06','Houston','Astros'),
+('E07','Oakland','Athletics'),
+('E08','Arlington','Rangers'),
+('E09','Chicago','Chicago Cubs'),
+('E10','San Francisco','Gigantes');
+INSERT INTO JUGADOR VALUES
+('J1','Andres Renteria',25),
+('J2','Jairo Palomeque',30),
+('J3','Luis Avilan',26),
+('J4','Justin Turner',19),
+('J5','Adrian González',17),
+('J6','Pedro Báez',32),
+('J7','Yimi García',28),
+('J8','Thyago Vieira',17),
+('J9','Danny Valencia',21),
+('J10','Edwin Díaz',23);
+INSERT INTO JUEGAEN VALUES
+('J1','E02',1),
+('J2','E01',1),
+('J3','E06',4),
+('J4','E02',3),
+('J5','E03',6),
+('J6','E09',5),
+('J7','E01',2),
+('J8','E10',5),
+('J9','E04',1),
+('J10','E05',4);
+INSERT INTO ENTRENADOR VALUES
+('Joe Girardi','Cl. 22 #1-01',4458679,'23/06/1960'),
+('Robin Ventura','Cl. 19 #2-01',3356147,'30/08/1972'),
+('John Farrel','Cr. 17 #3-01',2828965,'04/12/1979'),
+('Scott Servais','Cl. 15 #4-01',1365894,'13/01/1985'),
+('Jeff Banister','Cr. 12 #5-01',7861304,'16/10/1968'),
+('Dave Roberts','Cl. 9 #6-01',4569871,'22/02/1972'),
+('Bruce Bochy','Trv. 22 #7-01',1236547,'19/09/1969'),
+('Bryan Price','Cl. 6 #8-01',4489965,'31/12/1979'),
+('Terry Collins','Cr. 3N #9-01',3084167,'06/06/1976'),
+('Joe Maddon','Av. 2 #10-01',4862195,'03/02/1980');
+INSERT INTO EXPERIENCIADT VALUES
+('Joe Girardi','E03','Manager',2),
+('Robin Ventura','E01','Manager',7),
+('John Farrel','E05','Manager',5),
+('Scott Servais','E10','Manager',3),
+('Jeff Banister','E09','Manager',4),
+('Dave Roberts','E07','Manager',1),
+('Bruce Bochy','E06','Manager',6),
+('Bryan Price','E02','Manager',8),
+('Terry Collins','E04','Manager',3),
+('Joe Maddon','E08','Manager',4);
+
+SELECT nombreDT,telefono
+FROM ENTRENADOR
+WHERE nombreDT IN
+	(SELECT nombreDT
+	FROM EXPERIENCIADT
+	WHERE años>5)
+
+SELECT nombrej
+FROM JUGADOR
+WHERE nrojugador IN
+	(SELECT nrojugador
+	FROM JUEGAEN
+	WHERE años>2 and nroequipo IN
+		(SELECT nroequipo
+		FROM EQUIPO
+		WHERE nombreEq='Dodgers'))
+
+SELECT nombrej
+FROM JUGADOR
+WHERE nroJugador IN
+	(SELECT nroJugador
+	FROM JUEGAEN
+	WHERE nroEquipo IN
+		(SELECT nroEquipo
+     	FROM EXPERIENCIADT
+     	WHERE nroEquipo IN
+     		(SELECT nroEquipo
+			FROM EQUIPO
+			WHERE nombreEq='Marineros')))
+   
+SELECT nombreDT
+FROM EXPERIENCIADT
+WHERE nroEquipo IN
+	(SELECT nroEquipo
+	FROM JUEGAEN
+	WHERE nroJugador='J1')
+
+SELECT nombreJ
+FROM JUGADOR
+WHERE nroJugador IN
+	(SELECT nroJugador
+	FROM JUEGAEN
+	WHERE nroEquipo IN
+		(SELECT nroEquipo
+		FROM EQUIPO
+		WHERE nombreEq != 'Medias Rojas'))
+
+SELECT nombreJ
+FROM JUGADOR
+WHERE edadJ IN
+	(SELECT MAX(edadJ)
+	FROM JUGADOR)
+    
+
+SELECT nombreJ
+FROM Jugador
+WHERE not exists
+	(SELECT nroEquipo
+	FROM Equipo
+	WHERE not exists
+		(SELECT *
+		FROM JuegaEn
+		WHERE JuegaEn.nroEquipo = Equipo.nroEquipo and
+ 			  JuegaEn.nroJugador = Jugador.nroJugador ) );
+
+
